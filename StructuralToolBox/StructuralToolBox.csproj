@@ -1,0 +1,235 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9C525F9F-891A-4638-B303-1B7939A663F2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>StructuralToolBox</RootNamespace>
+    <AssemblyName>StructuralToolBox</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CSparse, Version=3.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CSparse.3.5.0\lib\net45\CSparse.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="RhinoCommon">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\Rhino 6\System\rhinocommon.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Grasshopper">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\Rhino 6\Plug-ins\Grasshopper\Grasshopper.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="GH_IO">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\Rhino 6\Plug-ins\Grasshopper\GH_IO.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Classes\SolveLS.cs" />
+    <Compile Include="Classes\Model.cs" />
+    <Compile Include="Classes\Common.cs" />
+    <Compile Include="Classes\Element_1D.cs" />
+    <Compile Include="Classes\Load.cs" />
+    <Compile Include="Classes\Material.cs" />
+    <Compile Include="Classes\Node.cs" />
+    <Compile Include="Classes\Section.cs" />
+    <Compile Include="Classes\Support.cs" />
+    <Compile Include="Components\01_Material.cs" />
+    <Compile Include="Components\02_Sections.cs" />
+    <Compile Include="Components\03_Support.cs" />
+    <Compile Include="Components\04_Loads.cs" />
+    <Compile Include="Components\05_Element1D.cs" />
+    <Compile Include="Components\05_ElementHinge.cs" />
+    <Compile Include="Components\06_Assembly.cs" />
+    <Compile Include="Components\07_SolveLS.cs" />
+    <Compile Include="Components\08_DeformedShape.cs" />
+    <Compile Include="Components\08_Elem1DForces.cs" />
+    <Compile Include="Components\08_Reaction.cs" />
+    <Compile Include="Components\98_Draw_CrossSection.cs" />
+    <Compile Include="Components\99_Disassembles.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="StructuralToolBoxInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons_C_Sec_CHS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons_C_Sec_I.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons_I_Sec.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons_P_Sec.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons_I_Mat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons_P_Mat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons_C_Mat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons_C_Sec_C.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons_C_Sec_R.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons_C_Sec_RHS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons_I_Node.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons_I_Sup.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons_P_Elem1D.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons_P_Load_P.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons_P_Node.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons_P_Sup.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons_C_Elem1D.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons_C_Load_P.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons_C_Sup.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons_I_Elem1D.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons_I_Load_P.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons_P_Mdl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons_C_Def.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons_C_Mdl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons_C_Sol_LS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons_I_Mdl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons_I_DrawCS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons_C_ElemHinge.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons_C_ElemForces.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons_C_Reaction.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>Copy "$(TargetPath)" "$(TargetDir)$(ProjectName).gha"
+Copy "$(TargetPath)" "%25UserProfile%25\AppData\Roaming\Grasshopper\Libraries\NTNU\$(ProjectName).gha"
+Erase "$(TargetPath)"</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <FallbackCulture>en-US</FallbackCulture>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <StartProgram>C:\Program Files\Rhino 6\System\Rhino.exe</StartProgram>
+    <StartArguments>
+    </StartArguments>
+    <StartAction>Program</StartAction>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+</Project>
