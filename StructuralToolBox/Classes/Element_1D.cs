@@ -137,6 +137,7 @@ namespace StructuralToolBox
 
             Pln = new Plane(Line.From, vy, vz);
 
+
             return beta;
         }
 
@@ -146,6 +147,12 @@ namespace StructuralToolBox
             b.Unitize();
 
             double theta = Math.Acos(a.X * b.X + a.Y * b.Y + a.Z * b.Z);
+
+            if (double.IsNaN(theta))
+            {
+                theta = 0;
+            }
+
 
             return theta;
         }
