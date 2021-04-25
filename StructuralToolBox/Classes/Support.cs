@@ -18,7 +18,9 @@ namespace StructuralToolBox
 
         public List<bool> Conditions { get; private set; } = null;
         public Node Node { get; set; } = null;
-        public List<double[]> React { get; private set; } = new List<double[]>();
+        // public List<double[]> React { get; private set; } = new List<double[]>();
+        // List[loadcase][6 forces]
+        public List<List<double>> React { get; private set; } = new List<List<double>>();
 
         // --- constructors --- 
         public Support() { }
@@ -29,9 +31,21 @@ namespace StructuralToolBox
             Conditions = new List<bool>();
 
             ProcessConditions(_conditions);
+
         }
 
         // --- methods ---
+        public void InitializeReact(int num_lcs)
+        {
+            List<List<double>> reacts = new List<List<double>>();
+            for (int i = 0; i < num_lcs; i++)
+            {
+                reacts.Add(new List<double>(6) { 0, 0, 0, 0, 0, 0 }); 
+            }
+
+            React = reacts;
+        }
+
         private void ProcessConditions(string _conditions)
         {
             if (_conditions.Length != 6)
