@@ -43,19 +43,33 @@ namespace StructuralToolBox
             DenseMatrix lV = CreateLoadMX();
             Mdl.LM = lV.Clone();
 
+            // Reaction initialization
+            foreach (Support s in Mdl.Sups)
+            {
+                s.InitializeReact(lV.ColumnCount);
+            }
+
 
             // overwrite boundary condition & load
             foreach (Node n in Mdl.Nodes.Where(n => n.Sup != null))
             {
+                // i: i-th degree of freedom in a node
                 for (int i = 0; i < N_DOF; i++)
                 {
-                    if (n.Sup.Conditions[i] == false) continue;
+                    if (n.Sup.Conditions[i] == false)
+                    {
+                        continue;
+                    }
 
                     int ind = N_DOF * n.Id.Value + i;
 
                     // load vector (matrix)
+                    // j: load case
                     for (int j = 0; j < lV.ColumnCount; j++)
                     {
+
+                        n.Sup.React[j][i] = -1 * lV[ind, j];
+
                         lV[ind, j] = 0;
                     }
 
@@ -109,6 +123,7 @@ namespace StructuralToolBox
             }
 
             // reaction forces
+            // i: load case
             for (int i = 0; i < lVs.ColumnCount; i++)
             {
                 var Disp = new DenseMatrix(Mdl.Nodes.Count * N_DOF, 1, Mdl.Disps[i]);
@@ -118,7 +133,15 @@ namespace StructuralToolBox
                     int sid = s.Node.Id.Value * N_DOF;
                     double[] fs = new double[N_DOF];
                     Array.Copy(FM.Column(0), sid, fs, 0, N_DOF);
-                    s.React.Add(fs);
+
+                    // s.React.Add(fs);
+
+                    // j: degree of freedom
+                    for (int j = 0; j < N_DOF; j++)
+                    {
+                        s.React[i][j] += fs[j];
+                    }
+
                 }
             }
 
