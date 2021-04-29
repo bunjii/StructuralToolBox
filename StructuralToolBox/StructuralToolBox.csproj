@@ -95,10 +95,12 @@
     <Compile Include="Components\05_Element1D.cs" />
     <Compile Include="Components\05_ElementHinge.cs" />
     <Compile Include="Components\06_Assembly.cs" />
+    <Compile Include="Components\07_CroSecOpt.cs" />
     <Compile Include="Components\07_SolveLS.cs" />
     <Compile Include="Components\08_DeformedShape.cs" />
     <Compile Include="Components\08_Elem1DForces.cs" />
     <Compile Include="Components\08_Reaction.cs" />
+    <Compile Include="Components\08_Utilisation.cs" />
     <Compile Include="Components\98_Draw_CrossSection.cs" />
     <Compile Include="Components\99_Disassembles.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -208,6 +210,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons_C_Reaction.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons_C_Sol_CSOpt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons_C_Sol_Util.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
