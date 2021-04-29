@@ -22,7 +22,7 @@ namespace StructuralToolBox
         // --- field ---
         public Line Line { get; set; }
         public string Tag { get; private set; }
-        public Section Sec { get; private set; }
+        public Section Sec { get; set; }
         public List<Node> Nodes { get; private set; }
         public int? Id { get; set; } = null;
         public DenseMatrix EK { get; set; }
@@ -32,17 +32,19 @@ namespace StructuralToolBox
         public List<bool> Hinges { get; } = new List<bool>();
         public double Beta { get; set; }
         public Plane Pln { get; set; }
-        public double Weight { get; private set; }
+        public double Weight { get; set; }
+        public double Buckling_Length { get; set; }
         
 
         // --- constructors --- 
         public Element_1D() { }
-        public Element_1D(Line _line, string _tag, Section _sec, Vector3d _vz)
+        public Element_1D(Line _line, string _tag, Section _sec, Vector3d _vz, double _bucklen)
         {
             Line = _line;
             Tag = _tag;
             Sec = _sec;
             Vz = _vz;
+            Buckling_Length = _bucklen;
             
             Nodes = new List<Node>();
             Beta = Calc_Beta(_vz);

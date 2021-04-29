@@ -23,6 +23,8 @@ namespace StructuralToolBox
         public double J { get; protected set; }
         public double Wy { get; protected set; }
         public double Wz { get; protected set; }
+        public double Wpy { get; protected set; }
+        public double Wpz { get; protected set; }
         public double Theta { get; set; }
         public List<Curve> Curves { get; protected set; } = new List<Curve>();
         public List<Point3d> Pts { get; protected set; } = new List<Point3d>();
@@ -84,6 +86,9 @@ namespace StructuralToolBox
 
             Wy = Iy / (0.5 * H);
             Wz = Iz / (0.5 * B);
+
+            Wpy = 0.25 * B * H * H;
+            Wpz = 0.25 * H * B * B;
 
             J = Calculate_J();
 
@@ -180,6 +185,9 @@ namespace StructuralToolBox
             Wy = Iy / (0.5 * D);
             Wz = Wy;
 
+            Wpy = Math.Pow(D, 3) / 6;
+            Wpz = Wpy;
+
             J = 1.0 / 32.0 * Math.PI * Math.Pow(D, 4);
 
             Curves.Add(DrawCurve());
@@ -240,6 +248,9 @@ namespace StructuralToolBox
 
             Wy = Iy / (0.5 * H);
             Wz = Iz / (0.5 * W);
+
+            Wpy = W * Tf * (H - Tf) + Math.Pow(H - 2 * Tf, 2) * Tw / 4;
+            Wpz = Tf * W * W / 2 + (H - 2 * Tf) * Tw * Tw / 4;
 
             J = 1.0 / 3.0 * (2.0 * W * Math.Pow(Tf, 3) + (H - 2.0 * Tf) * Math.Pow(Tw, 3));
 
@@ -319,6 +330,9 @@ namespace StructuralToolBox
 
             Wy = Iy / (0.5 * H);
             Wz = Iz / (0.5 * W);
+
+            Wpy = W * Tf * (H - Tf) + Math.Pow(H - 2 * Tf, 2) * Tw / 2;
+            Wpz = H * Tw * (W - Tw) + Math.Pow(W - 2 * Tw, 2) * Tf / 2;
 
             J = 2.0 * Math.Pow((W-Tw)*(H-Tf), 2) / ((W-Tw)/Tf+(H-Tf)/Tw);
 
@@ -401,6 +415,9 @@ namespace StructuralToolBox
 
             Wy = Iy / (0.5 * D);
             Wz = Wy;
+
+            Wpy = Math.Pow(D, 3) / 6 * (1 - Math.Pow(1 - 2 * T / D, 3));
+            Wpz = Wpy;
 
             J = 1.0 / 32.0 * Math.PI * (Math.Pow(D, 4) - Math.Pow(D - 2.0 * T, 4));
 

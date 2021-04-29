@@ -193,9 +193,29 @@ namespace StructuralToolBox.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons_C_Sol_CSOpt {
+            get {
+                object obj = ResourceManager.GetObject("icons_C_Sol_CSOpt", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons_C_Sol_LS {
             get {
                 object obj = ResourceManager.GetObject("icons_C_Sol_LS", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons_C_Sol_Util {
+            get {
+                object obj = ResourceManager.GetObject("icons_C_Sol_Util", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

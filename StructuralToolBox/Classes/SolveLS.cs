@@ -220,7 +220,7 @@ namespace StructuralToolBox
 
         private DenseMatrix CreateLoadMX()
         {
-            int[] LCs = Mdl.Loads.Select(x => x.Lc.Value).Distinct().ToArray();
+            int[] LCs = Mdl.LCs;
             DenseMatrix loadMX = new DenseMatrix(N_DOF * Mdl.Nodes.Count, LCs.Length);
 
             foreach (Load l in Mdl.Loads)
@@ -228,7 +228,7 @@ namespace StructuralToolBox
                 int lc = Array.IndexOf(LCs, l.Lc);
                 if (!(l is Load_Point pl)) continue;
 
-                int nid = pl.Node.Id.Value;
+                // int nid = pl.Node.Id.Value;
                 List<double> lds = pl.Loads;
 
                 for (int i = 0; i < N_DOF; i++)

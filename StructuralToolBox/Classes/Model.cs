@@ -22,16 +22,14 @@ namespace StructuralToolBox
         public List<Element_1D> Elem1Ds { get; private set; } = null;
         public List<Support> Sups { get; private set; } = null;
         public List<Load> Loads { get; private set; } = null;
-
         public BoundingBox Bbox { get; private set; }
-
         public List<Node> Nodes { get; private set; }
         public double Weight { get; private set; }
-
         public List<bool> Validity { get; private set; } = new List<bool>();
         public DenseColumnMajorStorage<double> KG { get; set; } = null;
         public DenseColumnMajorStorage<double> LM { get; set; } = null;
         public List<double[]> Disps { get; private set; } = new List<double[]>();
+        public int[] LCs { get; private set; }
         public int? SelectedLC { get; set; } = null;
 
         // --- constructors --- 
@@ -97,6 +95,8 @@ namespace StructuralToolBox
 
                 }
 
+                nd.Elems.Add(_elem);
+
                 _elem.Nodes.Add(nd);
             }
 
@@ -154,6 +154,8 @@ namespace StructuralToolBox
                     pl.Node = nd;
                 }
             }
+
+            LCs = Loads.Select(x => x.Lc.Value).Distinct().ToArray();
 
             return true;
         }

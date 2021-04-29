@@ -21,6 +21,8 @@ namespace StructuralToolBox
         public Support Sup { get; set; } = null;
         public List<double[]> Disps { get; private set; } = new List<double[]>();
 
+        public List<Element_1D> Elems { get; private set; } = new List<Element_1D>();
+
         // --- constructors --- 
         public Node() { }
         public Node(Point3d _pt, int _id, BoundingBox _bb)

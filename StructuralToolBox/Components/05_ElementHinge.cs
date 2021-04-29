@@ -31,7 +31,7 @@ namespace StructuralToolBox
             pManager.AddBooleanParameter("start My","sMy", "set this to False for making a hinge at start point around local-y axis", GH_ParamAccess.item, true);
             pManager.AddBooleanParameter("start Mz", "sMz", "set this to False for making a hinge at start point around local-z axis", GH_ParamAccess.item, true);
             pManager.AddBooleanParameter("end My", "eMy", "set this to False for making a hinge at end point around local-y axis", GH_ParamAccess.item, true);
-            pManager.AddBooleanParameter("end Mz", "sMy", "set this to False for making a hinge at start point around local-y axis", GH_ParamAccess.item, true);
+            pManager.AddBooleanParameter("end Mz", "eMz", "set this to False for making a hinge at start point around local-y axis", GH_ParamAccess.item, true);
 
             pManager[0].Optional = true;
             pManager[1].Optional = true;
@@ -75,7 +75,7 @@ namespace StructuralToolBox
             // --- solve ---
             foreach (GH_Element_1D gh_e in gh_elems)
             {
-                Element_1D e = new Element_1D(gh_e.Value.Line, gh_e.Value.Tag, gh_e.Value.Sec, gh_e.Value.Vz);
+                Element_1D e = new Element_1D(gh_e.Value.Line, gh_e.Value.Tag, gh_e.Value.Sec, gh_e.Value.Vz, gh_e.Value.Buckling_Length);
 
                 e.SetHingeData(sMy, sMz, eMy, eMz);
                 e.EK = e.Calc_ElemStiffMX();

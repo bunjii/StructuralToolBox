@@ -30,11 +30,13 @@ namespace StructuralToolBox
             pManager.AddParameter(new Param_Section(), "Section", "Sec", "Section", GH_ParamAccess.item);
             pManager.AddTextParameter("Tag", "tag", "Tag", GH_ParamAccess.item);
             pManager.AddVectorParameter("z-dir", "z-dir", "z-dir", GH_ParamAccess.list);
+            // pManager.AddNumberParameter("buckling length", "buckling len", "override buckling length with this value. By default, it is the distance between start point and end point.", GH_ParamAccess.list);
 
             pManager[0].Optional = true;
             pManager[1].Optional = true;
             pManager[2].Optional = true;
             pManager[3].Optional = true;
+            // pManager[4].Optional = true;
         }
 
         /// <summary>
@@ -56,6 +58,7 @@ namespace StructuralToolBox
             GH_Section gh_sec = new GH_Section();
             string tag = null;
             List<Vector3d> zs = new List<Vector3d>();
+            List<double> bucklens = new List<double>();
 
             List<GH_Element_1D> gh_elem1Ds; 
 
@@ -64,10 +67,9 @@ namespace StructuralToolBox
             if (!DA.GetData(1, ref gh_sec)) { return; }
             if (!DA.GetData(2, ref tag)) { return; }
             DA.GetDataList(3, zs);
+            // DA.GetDataList(4, bucklens);
 
             // --- solve ---
-
-            // Rhino.RhinoApp.WriteLine("##########################");
 
             gh_elem1Ds = new List<GH_Element_1D>(lines.Count);
 
@@ -77,22 +79,32 @@ namespace StructuralToolBox
                 if (i < zs.Count)
                 {
                     vz = zs[i];
-                    // Rhino.RhinoApp.WriteLine("if vz = : " + zs[i]);
                 }
                 else if (zs.Count == 0)
                 {
                     vz = new Vector3d(0, 0, 0);
-                    // Rhino.RhinoApp.WriteLine("else if vz = : " + vz);
                 }
 
                 else
                 {
-                    vz = zs[zs.Count - 1]; // new Vector3d();
-                    // Rhino.RhinoApp.WriteLine("else vz = : " + vz.ToString());
+                    vz = zs[zs.Count - 1]; 
                 }
 
-                gh_elem1Ds.Add(new GH_Element_1D(new Element_1D(lines[i], tag, gh_sec.Value, vz)));
-                // Rhino.RhinoApp.WriteLine("---------------------------");
+                double bucklen; 
+                if (bucklens.Count == 0)
+                {
+                    bucklen = lines[i].Length;
+                }
+                else if (i < bucklens.Count)
+                {
+                    bucklen = bucklens[i];
+                }
+                else
+                {
+                    bucklen = bucklens[bucklens.Count - 1];
+                }
+
+                gh_elem1Ds.Add(new GH_Element_1D(new Element_1D(lines[i], tag, gh_sec.Value, vz, bucklen)));
             }
 
 
